@@ -1,0 +1,13 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "declaration": true
+  },
+  "paths": {
+    "tslib": ["node_modules/tslib/tslib.d.ts"]
+  },
+  "importHelpers": true
+}
