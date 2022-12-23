@@ -1,7 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { Button } from "@bleach-design/components";
+import { Button, Spin } from "@bleach-design/components";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,6 +29,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <Button />
+      <Spin />
     </div>
   );
 }
