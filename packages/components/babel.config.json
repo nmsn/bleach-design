@@ -1,10 +1,14 @@
 {
   "presets": [
+    "@babel/preset-typescript",
     "@babel/preset-env",
-    // "@babel/preset-react",
-    "@babel/plugin-transform-runtime"
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
   ],
-  "extensions": [".js", ".jsx", ".ts", ".tsx"],
-  "exclude": "**/node_modules/**",
-  "babelHelpers": "runtime"
+  "plugins": ["@emotion"],
+  // "extensions": [".js", ".jsx", ".ts", ".tsx"],
+  "exclude": "**/node_modules/**"
+  // "babelHelpers": "runtime"
 }
