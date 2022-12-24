@@ -1,7 +1,7 @@
-import { keyframes, css } from "@emotion/react";
+import { keyframes, css } from '@emotion/react';
 
 type SpinProps = {
-  size?: "small" | "normal" | "large";
+  size?: 'small' | 'normal' | 'large';
 };
 
 const spin = keyframes`
@@ -26,19 +26,17 @@ const sizeMap = {
   },
 };
 
-const baseStyles = (size: SpinProps["size"] = "normal") =>
+const baseStyles = (size: SpinProps['size'] = 'normal') =>
   css({
-    display: "block",
-    borderRadius: "100%",
-    border: "1px solid currentColor",
-    borderTopColor: "transparent",
+    display: 'block',
+    borderRadius: '100%',
+    border: '1px solid currentColor',
+    borderTopColor: 'transparent',
     animation: `${spin} 1s infinite linear`,
-    transformOrigin: "50% 50%",
+    transformOrigin: '50% 50%',
     ...sizeMap[size],
   });
 
-const Spin = ({ size = "normal" }: SpinProps) => (
-  <span css={baseStyles(size)} />
-);
+const Spin = ({ size = 'normal' }: SpinProps) => <span css={baseStyles(size)} />;
 
 export default Spin;

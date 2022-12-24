@@ -1,7 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import { Button, Spin } from "@bleach-design/components";
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import './App.css';
+import { Button, Spin } from '@bleach-design/components';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -40,9 +40,15 @@ function App() {
       <Button variant="primary" onClick={onClick} loading={loading}>
         确认
       </Button>
-      <Button variant="secondary" onClick={onClick} loading={loading}>确认</Button>
-      <Button variant="tertiary" onClick={onClick} loading={loading}>确认</Button>
-      <Button variant="primary" onClick={onClick} loading={loading} disabled>确认</Button>
+      <Button variant="secondary" onClick={onClick} loading={loading}>
+        确认
+      </Button>
+      <Button variant="tertiary" onClick={onClick} loading={loading}>
+        确认
+      </Button>
+      <Button variant="primary" onClick={onClick} loading={loading} disabled>
+        确认
+      </Button>
       <Spin />
     </div>
   );
