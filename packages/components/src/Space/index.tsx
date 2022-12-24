@@ -26,8 +26,12 @@ const getSize = (size: Required<Pick<SpaceProps, "size">>["size"]) => {
 };
 
 const directionMap = {
-  vertical: "column" as "column",
-  horizontal: "row" as "row",
+  vertical: {
+    flexDirection: "column" as "column",
+  },
+  horizontal: {
+    flexDirection: "row" as "row",
+  },
 };
 
 const baseStyles = ({
@@ -36,8 +40,9 @@ const baseStyles = ({
 }: Required<Pick<SpaceProps, "direction" | "size">>) => {
   return css({
     display: "flex",
-    flexDirection: directionMap[direction],
     gap: getSize(size),
+    alignItems: "center",
+    ...directionMap[direction],
   });
 };
 
@@ -47,7 +52,6 @@ const Space = ({
   children,
 }: SpaceProps) => {
   const childrenList = Children.toArray(children);
-  console.log(children, childrenList);
   return <div css={baseStyles({ direction, size })}>{childrenList}</div>;
 };
 
