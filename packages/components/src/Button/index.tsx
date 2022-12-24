@@ -10,12 +10,12 @@ export type ClickEvent<T = Element> =
 type ButtonProps = {
   children?: React.ReactNode;
   styles?: React.CSSProperties;
-  variant: "primary" | "secondary" | "tertiary";
-  size: "small" | "normal" | "large";
-  stretch: boolean;
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "middle" | "large";
+  stretch?: boolean;
   width?: number;
   height?: number;
-  disabled: boolean;
+  disabled?: boolean;
   loading?: boolean;
   onClick?: (event: ClickEvent) => void;
 };
@@ -26,7 +26,7 @@ const sizeMap = {
     minWidth: 32,
     height: 32,
   },
-  normal: {
+  middle: {
     fontSize: 16,
   },
   large: {
@@ -34,7 +34,7 @@ const sizeMap = {
   },
 };
 
-const baseStyles = ({ size = "normal" }: Pick<ButtonProps, "size">) => {
+const baseStyles = ({ size = "middle" }: Pick<ButtonProps, "size">) => {
   return css({
     display: "flex",
     justifyContent: "center",
@@ -47,10 +47,18 @@ const baseStyles = ({ size = "normal" }: Pick<ButtonProps, "size">) => {
 
 const variantMap = {
   primary: {
-    border: "none",
+    color: "white",
+    backgroundColor: "black",
+    border: "1px solid transparent",
   },
-  secondary: {},
-  tertiary: {},
+  secondary: {
+    border: "1px solid black",
+    backgroundColor: "transparent",
+  },
+  tertiary: {
+    backgroundColor: "transparent",
+    border: "1px solid transparent",
+  },
 };
 
 const variantStyles = ({
@@ -61,15 +69,22 @@ const variantStyles = ({
   });
 };
 
-const Button = ({ children, onClick, size, variant }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  loading,
+  size = "middle",
+  variant = "secondary",
+}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       css={[baseStyles({ size }), variantStyles({ variant })]}
     >
       <Space>
+        {/* TODO loading transition */}
+        {loading && <Spin size="small" />}
         {children}
-        <Spin size="small" />
       </Space>
     </button>
   );

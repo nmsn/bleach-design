@@ -6,9 +6,18 @@ import { Button, Spin } from "@bleach-design/components";
 function App() {
   const [count, setCount] = useState(0);
 
+  const [loading, setLoading] = useState(false);
+
+  const onClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
   return (
     <div className="App">
-      <div>
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
@@ -27,8 +36,12 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-      </p>
-      <Button>确认</Button>
+      </p> */}
+      <Button variant="primary" onClick={onClick} loading={loading}>
+        确认
+      </Button>
+      <Button variant="secondary" onClick={onClick} loading={loading}>确认</Button>
+      <Button variant="tertiary" onClick={onClick} loading={loading}>确认</Button>
       <Spin />
     </div>
   );
