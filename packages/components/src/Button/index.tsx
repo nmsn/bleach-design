@@ -32,7 +32,12 @@ const sizeMap = {
   },
 };
 
-const baseStyles = ({ size = 'middle' }: Pick<ButtonProps, 'size'>) => {
+const baseStyles = ({
+  size = 'middle',
+  stretch,
+  width,
+  height,
+}: Pick<ButtonProps, 'size' | 'stretch' | 'width' | 'height'>) => {
   return css({
     display: 'flex',
     cursor: 'pointer',
@@ -41,6 +46,8 @@ const baseStyles = ({ size = 'middle' }: Pick<ButtonProps, 'size'>) => {
     borderRadius: 8,
     padding: '8px 16px',
     transition: '0.1s',
+    width: stretch ? '100%' : width ?? 'auto',
+    height: height ?? 'auto',
     ...sizeMap[size],
   });
 };
@@ -105,12 +112,15 @@ const Button = ({
   size = 'middle',
   variant = 'secondary',
   disabled = false,
+  stretch = false,
+  width,
+  height,
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       css={[
-        baseStyles({ size }),
+        baseStyles({ size, stretch, width, height }),
         variantStyles({ variant }),
         disabled || loading ? disabledStyles() : undefined,
       ]}

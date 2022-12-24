@@ -46,7 +46,7 @@ function App() {
       <Button variant="tertiary" onClick={onClick} loading={loading}>
         确认
       </Button>
-      <Button variant="primary" onClick={onClick} loading={loading} disabled>
+      <Button variant="primary" onClick={onClick} loading={loading} disabled stretch>
         确认
       </Button>
       <Spin />
