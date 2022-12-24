@@ -42,31 +42,55 @@ const baseStyles = ({ size = "middle" }: Pick<ButtonProps, "size">) => {
     alignItems: "center",
     borderRadius: 8,
     padding: "8px 16px",
+    transition: "0.1s",
     ...sizeMap[size],
   });
 };
 
+const disabledOpacity = 0.5;
+const hoverOpacity = 0.7;
+
 const disabledStyles = () => {
   return css({
-    opacity: 0.5,
+    opacity: disabledOpacity,
     pointerEvents: "none",
-    boxShadow: "none",
   });
 };
+
+const activeColor = "rgba(220,220,220)";
 
 const variantMap = {
   primary: {
     color: "white",
     backgroundColor: "black",
     border: "1px solid transparent",
+    "&:hover": {
+      opacity: hoverOpacity,
+    },
+    "&:active": {
+      color: activeColor,
+    },
   },
   secondary: {
     border: "1px solid black",
     backgroundColor: "transparent",
+    "&:hover": {
+      opacity: 0.7,
+    },
+    "&:active": {
+      backgroundColor: activeColor,
+    },
   },
   tertiary: {
     backgroundColor: "transparent",
     border: "1px solid transparent",
+    "&:hover": {
+      opacity: 0.7,
+    },
+
+    "&:active": {
+      backgroundColor: activeColor,
+    },
   },
 };
 
