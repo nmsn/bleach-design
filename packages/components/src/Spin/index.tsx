@@ -30,7 +30,7 @@ const baseStyles = (size: SpinProps["size"] = "normal") =>
   css({
     display: "block",
     borderRadius: "100%",
-    border: "2px solid black",
+    border: "1px solid currentColor",
     borderTopColor: "transparent",
     animation: `${spin} 1s infinite linear`,
     transformOrigin: "50% 50%",
