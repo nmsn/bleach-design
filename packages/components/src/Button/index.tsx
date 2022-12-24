@@ -37,11 +37,20 @@ const sizeMap = {
 const baseStyles = ({ size = "middle" }: Pick<ButtonProps, "size">) => {
   return css({
     display: "flex",
+    cursor: "pointer",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
     padding: "8px 16px",
     ...sizeMap[size],
+  });
+};
+
+const disabledStyles = () => {
+  return css({
+    opacity: 0.5,
+    pointerEvents: "none",
+    boxShadow: "none",
   });
 };
 
@@ -75,11 +84,16 @@ const Button = ({
   loading,
   size = "middle",
   variant = "secondary",
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      css={[baseStyles({ size }), variantStyles({ variant })]}
+      css={[
+        baseStyles({ size }),
+        variantStyles({ variant }),
+        disabled || loading ? disabledStyles() : undefined,
+      ]}
     >
       <Space>
         {/* TODO loading transition */}

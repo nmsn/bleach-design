@@ -42,6 +42,7 @@ function App() {
       </Button>
       <Button variant="secondary" onClick={onClick} loading={loading}>确认</Button>
       <Button variant="tertiary" onClick={onClick} loading={loading}>确认</Button>
+      <Button variant="primary" onClick={onClick} loading={loading} disabled>确认</Button>
       <Spin />
     </div>
   );
