@@ -2,14 +2,21 @@
 import { forwardRef, useState, useEffect, useImperativeHandle, useRef } from 'react';
 import ReactDom from 'react-dom';
 import { css, keyframes, Keyframes } from '@emotion/react';
+import {} from '@icon-park/react';
 import useOverflowHidden from '../_util/hooks/useOverflowHidden';
+import Close from './Close';
 
 export interface IPopupRef {
   open: () => void;
 }
 
-interface IProps {
-  children: JSX.Element;
+interface ModalProps {
+  children: React.ReactNode;
+  width?: number;
+  height: number;
+  styles?: React.CSSProperties;
+  title?: React.ReactNode;
+  footer?: React.ReactNode;
 }
 
 // const TRANSITION_DURATION = 300;
@@ -64,21 +71,40 @@ const maskStyle = () => {
 const contentStyle = () => {
   return css`
     position: relative;
-    border-radius: 0.25rem;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--popup-content-background-color);
-    z-index: 20;
-    min-width: 25rem;
-    min-height: 25rem;
+    padding: 12px;
+    background-color: white;
+    z-index: 10;
+    width: 500px;
+    min-height: 400px;
+    color: black;
   `;
 };
 
-// let timeout = null;
+const headerStyle = ({ title }: { title?: React.ReactNode }) => {
+  const baseStyle = css`
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f5f5f5;
+  `;
+  if (title) {
+    return css`
+      ${baseStyle};
+      justify-content: space-between;
+    `;
+  }
 
-const Modal = forwardRef<IPopupRef, IProps>(({ children }, ref) => {
+  return css`
+    ${baseStyle};
+    justify-content: flex-end;
+  `;
+};
+
+const Modal = forwardRef<IPopupRef, ModalProps>(({ children, title, footer }, ref) => {
   const [visible, setVisible] = useState(false);
   const [enter, setEnter] = useState(false);
   const [leave, setLeave] = useState(false);
@@ -88,7 +114,6 @@ const Modal = forwardRef<IPopupRef, IProps>(({ children }, ref) => {
   useOverflowHidden(() => document.body, { hidden: visible });
 
   useEffect(() => {
-    // document.body.className = visible ? 'forbidScroll' : '';
     if (visible) {
       setEnter(true);
       timeout.current = setTimeout((): void => {
@@ -139,11 +164,6 @@ const Modal = forwardRef<IPopupRef, IProps>(({ children }, ref) => {
 
   const renderDom = visible ? (
     <div
-      // className={cName({
-      //   [styles.popup]: true,
-      //   [styles.enter]: enter,
-      //   [styles.leave]: leave,
-      // })}
       css={{
         ...containerStyle(),
       }}
@@ -155,8 +175,12 @@ const Modal = forwardRef<IPopupRef, IProps>(({ children }, ref) => {
         })}
       />
       <div css={css({ ...contentStyle(), animation: fadeAnimation(fadeIn, fadeOut) })}>
-        <div onClick={onClose}>关闭按钮</div>
-        {children}
+        <div css={css({ ...headerStyle({ title }) })}>
+          {title && <div>{title}</div>}
+          <Close onClick={onClose} />
+        </div>
+        <div>{children}</div>
+        {footer && <div>{footer}</div>}
       </div>
     </div>
   ) : (

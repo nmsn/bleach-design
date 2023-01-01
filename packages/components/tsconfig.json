@@ -13,6 +13,7 @@
     "jsxImportSource": "@emotion/react",
     "moduleResolution": "node",
     "noEmit": true,
+    "suppressImplicitAnyIndexErrors": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
