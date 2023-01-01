@@ -1,8 +1,7 @@
 // ./components/popup/index.tsx
 import { forwardRef, useState, useEffect, useImperativeHandle, useRef } from 'react';
 import ReactDom from 'react-dom';
-import { css, keyframes, Keyframes } from '@emotion/react';
-import {} from '@icon-park/react';
+import { css, keyframes } from '@emotion/react';
 import useOverflowHidden from '../_util/hooks/useOverflowHidden';
 import Close from './Close';
 
@@ -22,24 +21,35 @@ interface ModalProps {
 // const TRANSITION_DURATION = 300;
 
 const maskFadeIn = keyframes`
-0% {  opacity: 0; }
-  100% { opacity: .5 }
+  0% {  opacity: 0; }
+  100% { opacity: .5; }
 `;
 
 const maskFadeOut = keyframes`
-0% {  opacity: .5; }
-  100% { opacity: 0 }
+  0% {  opacity: .5; }
+  100% { opacity: 0; }
 `;
 
-const fadeIn = keyframes`
-0% {  opacity: 0; }
-  100% { opacity: 1 }
+const contentFadeIn = keyframes`
+  0% {  opacity: 0; }
+  100% { opacity: 1; }
 `;
 
-const fadeOut = keyframes`
-0% {  opacity: 1; }
-  100% { opacity: 0 }
+const contentFadeOut = keyframes`
+  0% {  opacity: 1; }
+  100% { opacity: 0; }
 `;
+
+const animationMap = {
+  mask: {
+    enter: maskFadeIn,
+    leave: maskFadeOut,
+  },
+  content: {
+    enter: contentFadeIn,
+    leave: contentFadeOut,
+  },
+};
 
 const containerStyle = () => {
   return css`
@@ -55,32 +65,36 @@ const containerStyle = () => {
   `;
 };
 
-const maskStyle = () => {
-  return css`
-    width: inherit;
-    height: inherit;
-    position: fixed;
-    background-color: #000;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    z-index: 10;
-  `;
+const maskStyle = (type?: 'enter' | 'leave') => {
+  return css({
+    width: 'inherit',
+    height: 'inherit',
+    position: 'fixed',
+    backgroundColor: '#000',
+    opacity: 0.5,
+    top: 0,
+    left: 0,
+    zIndex: 10,
+    animation:
+      type && animationMap.mask[type] ? `${animationMap.content[type]} .3s 1 ease-in-out` : undefined,
+  });
 };
 
-const contentStyle = () => {
-  return css`
-    position: relative;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    background-color: white;
-    z-index: 10;
-    width: 500px;
-    min-height: 400px;
-    color: black;
-  `;
+const contentStyle = (type?: 'enter' | 'leave') => {
+  return css({
+    position: 'relative',
+    borderRadius: 8,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 12,
+    backgroundColor: 'white',
+    zIndex: 10,
+    width: 500,
+    minHeight: 400,
+    color: 'black',
+    animation:
+      type && animationMap.content[type] ? `${animationMap.content[type]} .3s 1 ease-in-out` : undefined,
+  });
 };
 
 const headerStyle = ({ title }: { title?: React.ReactNode }) => {
@@ -142,40 +156,23 @@ const Modal = forwardRef<IPopupRef, ModalProps>(({ children, title, footer }, re
     setLeave(true);
     timeout.current = setTimeout((): void => {
       setLeave(false);
+      setVisible(false);
     }, 300);
-    setVisible(false);
   };
 
   useImperativeHandle(ref, () => ({
     open: onOpen,
   }));
 
-  const fadeAnimation = (fadeIn: Keyframes, fadeOut: Keyframes) => {
-    if (enter) {
-      return `${fadeIn} 1s infinite linear`;
-    }
+  const animationType = enter ? 'enter' : leave ? 'leave' : undefined;
 
-    if (leave) {
-      return `${fadeOut} 1s infinite linear`;
-    }
-
-    return undefined;
-  };
+  console.log(animationType);
 
   const renderDom = visible ? (
-    <div
-      css={{
-        ...containerStyle(),
-      }}
-    >
-      <div
-        css={css({
-          ...maskStyle(),
-          animation: fadeAnimation(maskFadeIn, maskFadeOut),
-        })}
-      />
-      <div css={css({ ...contentStyle(), animation: fadeAnimation(fadeIn, fadeOut) })}>
-        <div css={css({ ...headerStyle({ title }) })}>
+    <div css={containerStyle()}>
+      <div css={maskStyle()} />
+      <div css={contentStyle(animationType)}>
+        <div css={headerStyle({ title })}>
           {title && <div>{title}</div>}
           <Close onClick={onClose} />
         </div>
