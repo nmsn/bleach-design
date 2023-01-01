@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
-import { Button, Spin } from '@bleach-design/components';
+import { Button, Spin, Modal } from '@bleach-design/components';
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const ref = useRef(null);
 
   const [loading, setLoading] = useState(false);
 
   const onClick = () => {
     setLoading(true);
+
+    ref.current.open();
     setTimeout(() => {
       setLoading(false);
     }, 1000);
@@ -50,6 +54,10 @@ function App() {
         确认
       </Button>
       <Spin />
+
+      <Modal ref={ref}>
+        <div>123</div>
+      </Modal>
     </div>
   );
 }
