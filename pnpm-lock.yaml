@@ -22,7 +22,6 @@ importers:
       '@rollup/plugin-babel': ^6.0.3
       '@types/react': ^18.0.26
       '@types/react-dom': ^18.0.9
-      e: ^0.2.2
       prettier: ^2.7.1
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
@@ -39,7 +38,6 @@ importers:
       '@emotion/css': 11.10.5_@babel+core@7.20.7
       '@emotion/react': 11.10.5_3grbeiqrb6djg67fiejiqngkdi
       '@emotion/styled': 11.10.5_pwtpayi7py7ecifctvjbac33ee
-      e: 0.2.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
@@ -6976,11 +6974,6 @@ packages:
       readable-stream: 3.6.0
       stream-shift: 1.0.1
     dev: true
-
-  /e/0.2.2:
-    resolution: {integrity: sha512-GJ6Ex2MpGkzwmiddGXtJffKP5C6Ao3Db56DevROE49msv8l3CXNQCM3QOy0ug3YG5TPZQqHH/5oBwHz16yTWug==}
-    engines: {node: '>=12', npm: '>=6'}
-    dev: false
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
