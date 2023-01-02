@@ -76,7 +76,9 @@ const maskStyle = (type?: 'enter' | 'leave') => {
     left: 0,
     zIndex: 10,
     animation:
-      type && animationMap.mask[type] ? `${animationMap.content[type]} .3s 1 ease-in-out` : undefined,
+      type && animationMap.mask[type]
+        ? `${animationMap.mask[type]} .3s 1 ease-in-out`
+        : undefined,
   });
 };
 
@@ -93,7 +95,9 @@ const contentStyle = (type?: 'enter' | 'leave') => {
     minHeight: 400,
     color: 'black',
     animation:
-      type && animationMap.content[type] ? `${animationMap.content[type]} .3s 1 ease-in-out` : undefined,
+      type && animationMap.content[type]
+        ? `${animationMap.content[type]} .3s 1 ease-in-out`
+        : undefined,
   });
 };
 
@@ -170,7 +174,7 @@ const Modal = forwardRef<IPopupRef, ModalProps>(({ children, title, footer }, re
 
   const renderDom = visible ? (
     <div css={containerStyle()}>
-      <div css={maskStyle()} />
+      <div css={maskStyle(animationType)} />
       <div css={contentStyle(animationType)}>
         <div css={headerStyle({ title })}>
           {title && <div>{title}</div>}
