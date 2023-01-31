@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
-import { Button, Spin, Modal } from '@bleach-design/components';
+import { Button, Spin, Modal, Switch } from '@bleach-design/components';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -58,6 +58,8 @@ function App() {
       <Modal ref={ref}>
         <div>123</div>
       </Modal>
+      <Switch />
+      <div style={{ width: 200 }}>123</div>
     </div>
   );
 }
