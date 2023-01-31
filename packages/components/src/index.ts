@@ -3,3 +3,4 @@ export { default as Input } from './Input';
 export { default as Spin } from './Spin';
 export { default as Space } from './Space';
 export { default as Modal } from './Modal';
+export { default as Switch } from './Switch';
