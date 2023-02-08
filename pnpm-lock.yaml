@@ -88,12 +88,14 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       react: ^18.2.0
       react-dom: ^18.2.0
+      resize-observer-polyfill: ^1.5.1
       typescript: ^4.9.3
       vite: ^4.0.0
     dependencies:
       '@bleach-design/components': link:../components
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      resize-observer-polyfill: 1.5.1
     devDependencies:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
@@ -13405,7 +13407,6 @@ packages:
 
   /resize-observer-polyfill/1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
-    dev: true
 
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
